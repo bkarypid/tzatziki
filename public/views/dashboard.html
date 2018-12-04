@@ -1,0 +1,56 @@
+<div class="dashboard-wrapper section-wrapper">
+  <div class="medium-centered columns">
+    <div class="row">
+      <div style="margin-left: 20px;" class="col-md-12">
+        >> <a ng-href="{{guacamoleSessionSettingsUrl}}">Guacamole settings</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2 style="margin-top: 0px;">Dashboard</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-md-offset-8">
+        <div class="form-group">
+          <label class="col-sm-7 control-label">Refresh interval (seconds):</label>
+          <div class="col-sm-4">
+            <pf-select selected="refreshInterval" options="intervals"></pf-select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div data-drag="true" jqyoui-draggable="{animate:true}" class="col-md-10 col-md-offset-1 col-lg-5 text-center" id="donutHistoryWrapper">
+        <pf-card head-title="Connection history per backend" show-spinner="donutHistoryLoading" spinner-text="Loading" show-top-border="true">
+
+          <pf-donut-chart ng-show="donutHistoryDataAvailable" config="donutHistoryConfig" data="donutHistoryData" chart-height="donutHistoryHeight"></pf-donut-chart>
+          <pf-empty-state config="emptyStateConfig" ng-hide="donutHistoryDataAvailable"></pf-empty-state>
+        </pf-card>
+      </div>
+      <div data-drag="true" jqyoui-draggable="{animate:true}" class="col-md-10 col-md-offset-1 col-lg-5 col-lg-offset-0 text-center" id="aggStatusWrapper">
+        <pf-card head-title="Live Connections" show-spinner="aggStatusLoading" spinner-text="Loading" show-top-border="true">
+          <pf-aggregate-status-card ng-show="aggStatusDataAvailable" status="aggStatusData" layout="tall"></pf-aggregate-status-card>
+          <pf-empty-state config="emptyStateConfig" ng-hide="aggStatusDataAvailable"></pf-empty-state>
+        </pf-card>
+      </div>
+
+      <div data-drag="true" jqyoui-draggable="{animate:true}" class="col-md-10 col-md-offset-1 text-center" id="trendsTotalWrapper">
+        <pf-card head-title="Total active connections trend" show-spinner="trendsTotalLoading" spinner-text="Loading" show-top-border="true" filter="trendsTotalFilterConfig">
+
+          <pf-trends-chart config="trendsTotalConfig" chart-data="trendsTotalData" chart-height="trendsLiveHeight"></pf-trends-chart>
+        </pf-card>
+      </div>
+
+      <div data-drag="true" jqyoui-draggable="{animate:true}" class="col-md-10 col-md-offset-1 text-center" id="trendsMixedWrapper">
+        <pf-card head-title="Total connections per backend over time" show-spinner="trendsMixedLoading" spinner-text="Loading" show-top-border="true" filter="trendsMixedFilterConfig">
+
+          <pf-c3-chart id="trendsMixedChart" config="trendsMixedChartConfig"></pf-c3-chart>
+        </pf-card>
+      </div>
+
+    </div>
+  </div>
+</div>
+
