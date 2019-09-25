@@ -47,14 +47,14 @@ app.controller('AboutModalCtrl', function ($scope, $rootScope, $http) {
   $scope.title = "TZATZIKI";
   $scope.open = function () {
     $http.get('/api/v1/version')
-      .success(function(version) {
+      .then(function(version) {
         $scope.productInfo = [
-          { name: 'Version', value: version },
+          { name: 'Version', value: version.data },
           { name: 'Access', value: 'Read Only' }
         ];
         $scope.isOpen = true;
-      })
-      .error(function(err) {
+      },
+      function(err) {
         $scope.productInfo = [
           { name: 'Version', value: 'No version information available' },
           { name: 'Access', value: 'Read Only' }

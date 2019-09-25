@@ -120,10 +120,10 @@ app.factory("initialData", function($q, $http, $rootScope, $localstorage, Notifi
       var deferred = $q.defer();
       var connections = [];
       $http.get('/api/v1/guacamole/connection/history', {ignoreLoadingBar: ignoreBar})
-        .success(function(connections) {
-          deferred.resolve(connections);
-        })
-        .error(function(err) {
+        .then(function(connections) {
+          deferred.resolve(connections.data);
+        },
+        function(err) {
           Notifications.message (
             'warning',
             'Error',
@@ -140,10 +140,10 @@ app.factory("initialData", function($q, $http, $rootScope, $localstorage, Notifi
       var deferred = $q.defer();
       var connections = [];
       $http.get('/api/v1/guacamole/connection/active', {ignoreLoadingBar: ignoreBar})
-        .success(function(connections) {
-          deferred.resolve(connections);
-        })
-        .error(function(err) {
+        .then(function(connections) {
+          deferred.resolve(connections.data);
+        },
+        function(err) {
           Notifications.message (
             'warning',
             'Error',
@@ -159,12 +159,12 @@ app.factory("initialData", function($q, $http, $rootScope, $localstorage, Notifi
     getVersion: function() {
       var deferred = $q.defer();
       $http.get('/api/v1/version', {ignoreLoadingBar: true})
-        .success(function(version) {
-          $rootScope.version = version;
+        .then(function(version) {
+          $rootScope.version = version.data;
           $rootScope.versionError = null;
           deferred.resolve();
-        })
-        .error(function(err) {
+        },
+        function(err) {
           $rootScope.versionError = err;
           deferred.reject(err);
         });
@@ -173,10 +173,10 @@ app.factory("initialData", function($q, $http, $rootScope, $localstorage, Notifi
     getGuacamoleUrl: function() {
       var deferred = $q.defer();
       $http.get('/api/v1/guacamole/url', {ignoreLoadingBar: true})
-        .success(function(url) {
-          deferred.resolve(url);
-        })
-        .error(function(err) {
+        .then(function(url) {
+          deferred.resolve(url.data);
+        },
+        function(err) {
           console.log(err);
         });
       return deferred.promise;

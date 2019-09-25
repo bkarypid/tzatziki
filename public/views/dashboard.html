@@ -36,17 +36,17 @@
         </pf-card>
       </div>
 
-      <div data-drag="true" jqyoui-draggable="{animate:true}" class="col-md-10 col-md-offset-1 text-center" id="trendsTotalWrapper">
-        <pf-card head-title="Total active connections trend" show-spinner="trendsTotalLoading" spinner-text="Loading" show-top-border="true" filter="trendsTotalFilterConfig">
-
-          <pf-trends-chart config="trendsTotalConfig" chart-data="trendsTotalData" chart-height="trendsLiveHeight"></pf-trends-chart>
-        </pf-card>
-      </div>
-
       <div data-drag="true" jqyoui-draggable="{animate:true}" class="col-md-10 col-md-offset-1 text-center" id="trendsMixedWrapper">
         <pf-card head-title="Total connections per backend over time" show-spinner="trendsMixedLoading" spinner-text="Loading" show-top-border="true" filter="trendsMixedFilterConfig">
 
           <pf-c3-chart id="trendsMixedChart" config="trendsMixedChartConfig"></pf-c3-chart>
+        </pf-card>
+      </div>
+
+      <div data-drag="true" jqyoui-draggable="{animate:true}" class="col-md-10 col-md-offset-1 text-center" id="trendsTotalWrapper">
+        <pf-card head-title="Total active connections trend" show-spinner="trendsTotalLoading" spinner-text="Loading" show-top-border="true" filter="trendsTotalFilterConfig">
+
+          <pf-trends-chart config="trendsTotalConfig" chart-data="trendsTotalData" chart-height="trendsLiveHeight"></pf-trends-chart>
         </pf-card>
       </div>
 
