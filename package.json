@@ -7,6 +7,14 @@
   },
   "license": "MIT",
   "author": "Babis Karypidis",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bkarypid/tzatziki.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bkarypid/tzatziki/issues"
+  },
+  "homepage": "https://github.com/bkarypid/tzatziki#readme",
   "dependencies": {
     "body-parser": "1.18.3",
     "cookie-parser": "1.4.3",
