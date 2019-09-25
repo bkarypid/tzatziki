@@ -12,7 +12,7 @@ app.controller('HistoryCtrl', ['$scope', '$rootScope', '$state', '$filter', '$in
   };
 
   $scope.dtOptions = {
-    order: [[1, "asc"]],
+    order: [[3, "desc"]],
   };
 
   $scope.tableConfig = {
@@ -29,8 +29,8 @@ app.controller('HistoryCtrl', ['$scope', '$rootScope', '$state', '$filter', '$in
 
   $scope.columns = [];
   $scope.columns.push({ header: "Username", itemField: "username"});
-  $scope.columns.push({ header: "Start Time", itemField: "startDate", templateFn: function(value, item) { return $filter('date')(value, "d MMM y, HH:mm:ss")}});
-  $scope.columns.push({ header: "End Time", itemField: "endDate", templateFn: function(value, item) { return $filter('date')(value, "d MMM y, HH:mm:ss")}});
+  $scope.columns.push({ header: "Start Time", itemField: "startDate", type: "date", templateFn: function(value, item) { return $filter('date')(value, "yyyy-MM-dd hh:mm:ss")}});
+  $scope.columns.push({ header: "End Time", itemField: "endDate", templateFn: function(value, item) { return $filter('date')(value, "yyyy-MM-dd hh:mm:ss")}});
   $scope.columns.push({ header: "Connection Name", itemField: "connectionName"});
 
   var matchesFilter = function (item, filter) {

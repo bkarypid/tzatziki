@@ -29,7 +29,7 @@ app.controller('LiveCtrl', ['$scope', '$rootScope', '$state', '$filter', '$inter
 
   $scope.columns = [];
   $scope.columns.push({ header: "Username", itemField: "username"});
-  $scope.columns.push({ header: "Start Time", itemField: "startDate", templateFn: function(value, item) { return $filter('date')(value, "d MMM y, HH:mm:ss")}});
+  $scope.columns.push({ header: "Start Time", itemField: "startDate", templateFn: function(value, item) { return $filter('date')(value, "yyyy-MM-dd hh:mm:ss")}});
   $scope.columns.push({ header: "Remote Host", itemField: "remoteHost"});
 
   var matchesFilter = function (item, filter) {

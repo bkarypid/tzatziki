@@ -14,7 +14,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
           return initialData.getVersion();
         },
         liveConnections: function(initialData) {
-          return initialData.getLiveConnections(true);
+          return initialData.getLiveConnections(false);
         }
       }
     })
@@ -27,7 +27,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
           return initialData.getVersion();
         },
         connectionHistory: function(initialData) {
-          return initialData.getConnectionHistory(true);
+          return initialData.getConnectionHistory(false);
         }
       }
     })
