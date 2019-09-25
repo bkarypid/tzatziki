@@ -18,7 +18,7 @@ To download, you can clone this repository.
 
 Software required to be installed for runtime (tested on the following versions):
 
-* Node.js >= v6.*
+* Node.js >= v6.* (Tested with 6. 8. and 10.)
 
 It is recommended to set the NODE_ENV environment variable to 'production'
 
@@ -60,4 +60,12 @@ $ pm2 start server.js
 ```
 For more information and options on PM2 usage, please visit [PM2](http://pm2.keymetrics.io/)
 
-Also, there is an option to run the application as a systemd service.
+You could also run the application as a systemd service.
+
+A Dockerfile is also provided if you want to run Tzatziki as a container (the example below assumes you have created an env_vars file to set the necessary configuration options):
+```sh
+docker build -t tzatziki .
+docker run -p 18080:8080 -d --env-file env_vars tzatziki
+```
+
+The application also has built-in support to run within Openshift, for example as s2i
