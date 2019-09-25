@@ -3,7 +3,8 @@
 module.exports = function(app) {
 
   var logger = require('../util/logger');
-  var request = require('request');
+  var verifySSL = process.env.VERIFY_SSL || true;
+  var request = require('request').defaults({rejectUnauthorized:JSON.parse(verifySSL)});
 
   //Select method to retrieve connection history. API limits to 1000 connections
   var connectionHistorySource = process.env.HISTORY_SOURCE || 'api';

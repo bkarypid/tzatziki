@@ -38,6 +38,7 @@ Configuration options can be supplied with the following environment variables:
 * GUACAMOLE_PASSWORD (The password for the GUACAMOLE_USER - defaults to 'password')
 * GUACAMOLE_URL (The base URL for the Guacamole API - for example http://guacamole.example.com - defaults to 'localhost')
 * GUACAMOLE_UI_ROUTE (The URL to use for Guacamole UI links - falls back to the GUACAMOLE_URL value by default if not specified)
+* VERIFY_SSL (Should the Guacamole SSL cert chain be verified? Set to false if using self-signed certs - defaults to true)
 * HISTORY_SOURCE (The source to retrieve connection history from. It can be either 'mysql' or 'api'. Note that the API has a limit of 1000 entries. If mysql is selected the next env variables should be also set, otherwise they can be omitted)
 * MYSQL_HOST (The Guacamole MySQL database host/ip - defaults to 'localhost')
 * MYSQL_PORT (The Guacamole MySQL database host/ip - defaults to '3306')
@@ -68,4 +69,4 @@ docker build -t tzatziki .
 docker run -p 18080:8080 -d --env-file env_vars tzatziki
 ```
 
-The application also has built-in support to run within Openshift, for example as s2i
+The application also has built-in support to run within Openshift, for example as s2i using the nodejs image and selecting this repository as source
