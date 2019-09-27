@@ -28,6 +28,8 @@ module.exports = function(app) {
     };
   }
 
+  console.log(connectionOptions);
+
   function transformEntries(array) {
     var transformedEntries = [];
     for (let entry of array) {
