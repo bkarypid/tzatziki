@@ -69,4 +69,13 @@ docker build -t tzatziki .
 docker run -p 18080:8080 -d --env-file env_vars tzatziki
 ```
 
-The application also has built-in support to run within Openshift, for example as s2i using the nodejs image and selecting this repository as source
+#### Running on Openshift
+
+The application also has built-in support to run within Openshift (Tested on 3.9-3.11), for example as s2i using the nodejs image and selecting this repository as source.
+
+Or alternatively, you can also use the provided template openshift-template.yml to quickly build and deploy the tzatziki resources (template is based on [this](https://github.com/sclorg/nodejs-ex/blob/master/openshift/templates/nodejs.json)).
+```sh
+oc process -f openshift-template.yml | oc create -n <namespace_to_deploy_tzatziki> -f -
+```
+
+Once created, make sure that you set any appropriate enviornment variables to configure connection with your guacamole instance appropriately.
