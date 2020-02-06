@@ -22,17 +22,23 @@ metadata:
   name: tzatziki
 objects:
 - apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    name: ${NAME}
+    annotations:
+      serviceaccounts.openshift.io/oauth-redirectreference.primary: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"${NAME}"}}'
+- apiVersion: v1
   kind: Service
   metadata:
     annotations:
       description: Exposes and load balances the application pods
+      service.alpha.openshift.io/serving-cert-secret-name: ${NAME}-tls
     name: ${NAME}
   spec:
     ports:
-    - name: 8080-tcp
-      port: 8080
-      protocol: TCP
-      targetPort: 8080
+    - name: ${NAME}-proxy
+      port: 443
+      targetPort: 8443
     selector:
       name: ${NAME}
       deploymentconfig: ${NAME}
@@ -42,10 +48,8 @@ objects:
     name: ${NAME}
   spec:
     host: ${APPLICATION_DOMAIN}
-    port:
-      targetPort: 8080-tcp
     tls:
-      termination: edge
+      termination: Reencrypt
     to:
       kind: Service
       name: ${NAME}
@@ -119,8 +123,27 @@ objects:
           app: ${NAME}
         name: ${NAME}
       spec:
+        serviceAccountName: ${NAME}
         containers:
-        - env: []
+        - name: oauth-proxy
+          image: openshift/oauth-proxy:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 8443
+            name: public
+          args:
+          - --https-address=:8443
+          - --provider=openshift
+          - --openshift-service-account=${NAME}
+          - --upstream=http://localhost:8080
+          - --tls-cert=/etc/tls/private/tls.crt
+          - --tls-key=/etc/tls/private/tls.key
+          - --cookie-secret=SECRET
+          volumeMounts:
+          - mountPath: /etc/tls/private
+            name: ${NAME}-tls
+        - name: tzatziki
+          env: []
           image: ' '
           livenessProbe:
             httpGet:
@@ -128,7 +151,6 @@ objects:
               port: 8080
             initialDelaySeconds: 30
             timeoutSeconds: 3
-          name: tzatziki
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -137,6 +159,10 @@ objects:
               port: 8080
             initialDelaySeconds: 3
             timeoutSeconds: 3
+        volumes:
+        - name: ${NAME}-tls
+          secret:
+            secretName: ${NAME}-tls
     triggers:
     - imageChangeParams:
         automatic: true
