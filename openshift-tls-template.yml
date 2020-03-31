@@ -141,10 +141,10 @@ objects:
           - --cookie-secret=SECRET
           resources:
             requests:
-              memory: 64Mi
-              cpu: 50m
+              memory: 16Mi
+              cpu: 10m
             limits:
-              memory: 128Mi
+              memory: 64Mi
               cpu: 100m
           volumeMounts:
           - mountPath: /etc/tls/private
@@ -166,7 +166,7 @@ objects:
               cpu: 50m
             limits:
               memory: 256Mi
-              cpu: 250m
+              cpu: 500m
           readinessProbe:
             httpGet:
               path: /

@@ -5,7 +5,7 @@ app.controller('HistoryCtrl', ['$scope', '$rootScope', '$state', '$filter', '$in
   $scope.maxResults = 1000;
   $scope.refreshInterval = 60;
 
-  $scope.allItems = connectionHistory.slice(0,$scope.maxResults);
+  $scope.allItems = connectionHistory.slice(-$scope.maxResults);
   $scope.items = $scope.allItems;
   $scope.pageConfig = {
     pageNumber: 1,
@@ -147,7 +147,7 @@ app.controller('HistoryCtrl', ['$scope', '$rootScope', '$state', '$filter', '$in
     initialData.getConnectionHistory(true)
       .then(function(response) {
         if (!angular.equals($scope.allItems, response)) {
-          $scope.allItems = response.slice(0,$scope.maxResults);;
+          $scope.allItems = response.slice(-$scope.maxResults);;
           $scope.items = $scope.allItems;
           filterChange($scope.filterConfig.appliedFilters);
         }
